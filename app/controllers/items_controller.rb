@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
     def update
         item = @todo.items.find(params[:id])
         item.update(params_item)
-        if todo.save
+        if @todo.save
             render json: item, status: 201
         else
             render json: item.errors, status: 500

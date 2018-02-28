@@ -1,6 +1,4 @@
-class ApplicationController < ActionController::Base
-  protect_from_forgery with: :null_session
-  
+class ApplicationController < ActionController::API
   
   rescue_from ActiveRecord::RecordNotFound, :with => :response_not_found
   
