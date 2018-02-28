@@ -10,6 +10,12 @@ module Todoapp
   class Application < Rails::Application
     
     config.api_only = true
+    
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Request-Method' => '*'  
+    }
+  
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
