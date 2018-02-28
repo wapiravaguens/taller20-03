@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
     private 
     
     def params_item
-        params.require(:item).permit(:name, :description)
+        params.permit(:name, :description)
     end
     def set_todo
         @todo = Todo.find(params[:todo_id])
