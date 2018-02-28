@@ -1,35 +1,44 @@
 class ItemsController < ApplicationController
+    
+    before_action :set_todo
+        
     def index
-        items = Item.all
+        items = @todo.items
         render json: items, status: 200
     end
     def show
-        todo = Todo.find(params[:todo_id])
-        item = todo.items.find(params[:id])
+       item = @todo.items.find(params[:id])
         render json: item, status: 200
     end 
     def create
-        todo = Todo.new(params_todo)
-        if todo.save
-            render json: todo, status: 201
+        item = @todo.items.new(params_item)
+        if item.save
+            render json: item, status: 201
         else
-            render json: todo.errors, status: 500
+            render json: item.errors, status: 500
         end
     end
     def update
-        todo = Todo.find(params[:id])
-        todo.update(params_todo)
+        item = @todo.items.find(params[:id])
+        item.update(params_item)
         if todo.save
-            render json: todo, status: 201
+            render json: item, status: 201
         else
-            render json: todo.errors, status: 500
+            render json: item.errors, status: 500
         end
     end
-    def params_todo
-        params.require(:todo).permit(:name, :description, :duration)
-    end
     def destroy
-        todo = Todo.find(params[:id])
-        todo.destroy
+        item = @todo.items.find(params[:id])
+        item.destroy
+        head :no_content
+    end
+    
+    private 
+    
+    def params_item
+        params.require(:item).permit(:name, :description)
+    end
+    def set_todo
+        @todo = Todo.find(params[:todo_id])
     end
 end

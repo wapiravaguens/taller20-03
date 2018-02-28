@@ -24,11 +24,15 @@ class TodosController < ApplicationController
             render json: todo.errors, status: 500
         end
     end
-    def params_todo
-        params.require(:todo).permit(:name, :description, :duration)
-    end
     def destroy
         todo = Todo.find(params[:id])
         todo.destroy
+    end
+    
+    
+    private
+    
+    def params_todo
+        params.require(:todo).permit(:name, :description, :duration)
     end
 end
